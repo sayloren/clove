@@ -3,14 +3,10 @@ Wren Saylor
 Jan 2018
 Script to implement quick sort
 """
-
-import time
-count_conditionals = 0
+import argparse
 
 def quick_sort(quick_list):
-
     global count_conditionals
-
     count_conditionals += 1
     if len(quick_list) <= 1:
         return quick_list
@@ -25,12 +21,11 @@ def quick_sort(quick_list):
             quick_sort([x for x in quick_list[1:]
             if x >= quick_list[0]])
 
-quick_list = [2,8,8,1,4,3,6,7,9]
-start = time.time()
-print(quick_sort(quick_list))
-end = time.time()
-print(count_conditionals-1)
-print(end - start)
+def run_quick_sort(quick_list):
+    global count_conditionals
+    count_conditionals = 0
+    out_list = quick_sort(quick_list)
+    return out_list,count_conditionals-1
 
-n = len(quick_list)
-duration = end - start
+if __name__ == "__main__":
+	main()
