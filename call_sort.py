@@ -19,7 +19,6 @@ import pandas as pd
 import numpy as np
 
 import seaborn as sns
-from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
@@ -71,7 +70,6 @@ def main():
     # quick_fit = np.polyfit(x=quick_times, y=number_elements, deg=2,full=True)
 
     # graph
-    # pp = PdfPages('Sorting_graphs.pdf')
     sns.set_style('ticks')
     sns.set_palette("husl")
     gs = gridspec.GridSpec(2,1,height_ratios=[1,1],width_ratios=[1])
@@ -89,7 +87,6 @@ def main():
     ax1.set_xlabel("Time")
     sns.despine()
     plt.savefig("Sorting_graphs.png",format='png')
-    # pp.close()
 
 if __name__ == "__main__":
 	main()

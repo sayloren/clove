@@ -1,7 +1,6 @@
 # clove
 ## Algorithms Homework 2018
 
-#### Bubble and Quick Sort
+#### Bubble and Quick Sort, Jan 25
 
-<object data=""
-![](Sorting_graphs.png)
+![a](Sorting_graphs.png)
