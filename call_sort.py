@@ -71,7 +71,7 @@ def main():
     # quick_fit = np.polyfit(x=quick_times, y=number_elements, deg=2,full=True)
 
     # graph
-    pp = PdfPages('Sorting_graphs.png')
+    pp = PdfPages('Sorting_graphs.pdf')
     sns.set_style('ticks')
     sns.set_palette("husl")
     gs = gridspec.GridSpec(2,1,height_ratios=[1,1],width_ratios=[1])
@@ -88,7 +88,7 @@ def main():
     ax1.set_ylabel("Size of N")
     ax1.set_xlabel("Time")
     sns.despine()
-    plt.savefig(pp,format='png')
+    plt.savefig(pp,format='pdf')
     pp.close()
 
 if __name__ == "__main__":
