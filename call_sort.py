@@ -17,7 +17,7 @@ import quick_sort
 
 import pandas as pd
 import numpy as np
-from sympy import S, symbols
+import sympy #import S, symbols
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -79,13 +79,17 @@ def main():
     ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black',alpha=.5)
     sns.scatterplot(x="bubble", y="n", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
     sns.scatterplot(x="quick", y="n", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
-    # x = symbols("x")
-    # bubble_poly = sum(S("{:6.2f}".format(v))*x**i for i, v in enumerate(p[::-1]))
-    # bubble_eq_latex = sympy.printing.latex(poly)
-    ax0.set_title("Bubble Sort")
+    x = sympy.symbols("x")
+    bubble_fit = np.polyfit(pd_lists['bubble'], pd_lists['n'], 2)
+    quick_fit = np.polyfit(pd_lists['quick'], pd_lists['n'], 1)
+    bubble_poly = sum(sympy.S("{:6.2f}".format(v))*x**i for i, v in enumerate(bubble_fit[::-1]))
+    quick_poly = sum(sympy.S("{:6.2f}".format(v))*x**i for i, v in enumerate(quick_fit[::-1]))
+    bubble_latex = sympy.printing.latex(bubble_poly)
+    quick_latex = sympy.printing.latex(quick_poly)
+    ax0.set_title("Bubble Sort ${0}$".format(bubble_latex))
     ax0.set_ylabel("Size of N")
     ax0.set_xlabel("Time")
-    ax1.set_title("Quick Sort")
+    ax1.set_title("Quick Sort ${0}$".format(quick_latex))
     ax1.set_ylabel("Size of N")
     ax1.set_xlabel("Time")
     sns.despine()
