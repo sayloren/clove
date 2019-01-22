@@ -16,6 +16,7 @@ import bubble_sort
 import quick_sort
 
 import pandas as pd
+import numpy as np
 
 import seaborn as sns
 from matplotlib.backends.backend_pdf import PdfPages
@@ -35,8 +36,7 @@ def main():
     # empty lists to collect data from loop
     bubble_times,quick_times = [],[]
     number_elements = []
-
-    # still need to collect conditional and assignment counts
+    quick_cond,bubble_cond,bubble_assi = [],[],[]
 
     # make the random lists
     random_lists = [[random.randrange(args.max) for _ in range(random.randrange(args.element))] for __ in range(args.total)]
@@ -58,11 +58,16 @@ def main():
         # collect the times it took for each sort
         quick_times.append(quick_end - quick_start)
         bubble_times.append(bubble_end - bubble_start)
+        quick_cond.append(conditionals_quick)
+        bubble_cond.append(conditionals_bubble)
+        bubble_assi.append(assignments_bubble)
 
     # make data frame for out lists
-    pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements)),columns=['bubble','quick', 'n'])
+    pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,bubble_cond,bubble_assi)),columns=['bubble','quick', 'n',"q_conditional_count","b_conditional_count","b_assignment_count"])
 
     # graph
+    # get equation for line of best fit
+    # https://stackoverflow.com/questions/22239691/code-for-line-of-best-fit-of-a-scatter-plot-in-python
     pp = PdfPages('Sorting_graphs.pdf')
     sns.set_style('ticks')
     sns.set_palette("husl")
@@ -71,10 +76,14 @@ def main():
     plt.figure(figsize=(10,10))
     ax0 = plt.subplot(gs[0,:])
     ax1 = plt.subplot(gs[1,:],sharex=ax0)
-    sns.scatterplot(x="bubble", y="n", data=pd_lists,ax=ax0)
-    sns.scatterplot(x="quick", y="n", data=pd_lists,ax=ax1)
+    sns.scatterplot(x="bubble", y="n", size="b_conditional_count", hue="b_assignment_count", data=pd_lists,ax=ax0)
+    sns.scatterplot(x="quick", y="n", size="q_conditional_count",data=pd_lists,ax=ax1)
     ax0.set_title("Bubble Sort")
+    ax0.set_ylabel("Size of N")
+    ax0.set_xlabel("Time")
     ax1.set_title("Quick Sort")
+    ax1.set_ylabel("Size of N")
+    ax1.set_xlabel("Time")
     sns.despine()
     plt.savefig(pp,format='pdf')
     pp.close()
