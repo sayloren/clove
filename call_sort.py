@@ -26,7 +26,7 @@ def get_args():
     parser = argparse.ArgumentParser(description="Description")
     parser.add_argument("-t", "--total", type=int, default="100", help='number of random lists to generate')
     parser.add_argument("-m", "--max", type=int, default="10", help='the largest number in the random lists')
-    parser.add_argument("-e", "--element", type=int, default="100", help='the population from which to draw the random number of elements per list')
+    parser.add_argument("-e", "--element", type=int, default="1000", help='the population from which to draw the random number of elements per list')
     return parser.parse_args()
 
 def main():
@@ -64,11 +64,6 @@ def main():
     # make data frame for out lists
     pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,bubble_cond,bubble_assi)),columns=['bubble','quick', 'n',"q_conditional_count","b_conditional_count","b_assignment_count"])
 
-    # get line of best fit for sorts
-    # https://stackoverflow.com/questions/22239691/code-for-line-of-best-fit-of-a-scatter-plot-in-python
-    # bubble_fit = np.polyfit(x=bubble_times, y=number_elements, deg=2,full=True)
-    # quick_fit = np.polyfit(x=quick_times, y=number_elements, deg=2,full=True)
-
     # graph
     sns.set_style('ticks')
     sns.set_palette("husl")
@@ -79,6 +74,9 @@ def main():
     ax1 = plt.subplot(gs[1,:],sharex=ax0)
     sns.scatterplot(x="bubble", y="n", size="b_conditional_count", hue="b_assignment_count", data=pd_lists,ax=ax0)
     sns.scatterplot(x="quick", y="n", size="q_conditional_count",data=pd_lists,ax=ax1)
+    # kind of sloppy line of best fit
+    ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black')
+    ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black')
     ax0.set_title("Bubble Sort")
     ax0.set_ylabel("Size of N")
     ax0.set_xlabel("Time")
