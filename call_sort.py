@@ -17,6 +17,7 @@ import quick_sort
 
 import pandas as pd
 import numpy as np
+from sympy import S, symbols
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -35,7 +36,7 @@ def main():
     # empty lists to collect data from loop
     bubble_times,quick_times = [],[]
     number_elements = []
-    quick_cond,bubble_cond,bubble_assi = [],[],[]
+    quick_cond,quick_assi,bubble_cond,bubble_assi = [],[],[],[]
 
     # make the random lists
     random_lists = [[random.randrange(args.max) for _ in range(random.randrange(args.element))] for __ in range(args.total)]
@@ -46,7 +47,7 @@ def main():
 
         # run quick sort
         quick_start = time.time()
-        out_bubble,conditionals_quick = quick_sort.run_quick_sort(r)
+        out_bubble,assignments_quick,conditionals_quick = quick_sort.run_quick_sort(r)
         quick_end = time.time()
 
         # run bubble sort
@@ -58,11 +59,12 @@ def main():
         quick_times.append(quick_end - quick_start)
         bubble_times.append(bubble_end - bubble_start)
         quick_cond.append(conditionals_quick)
+        quick_assi.append(assignments_quick)
         bubble_cond.append(conditionals_bubble)
         bubble_assi.append(assignments_bubble)
 
     # make data frame for out lists
-    pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,bubble_cond,bubble_assi)),columns=['bubble','quick', 'n',"q_conditional_count","b_conditional_count","b_assignment_count"])
+    pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,quick_assi,bubble_cond,bubble_assi)),columns=['bubble','quick', 'n',"q_conditional","q_assignment","b_conditional","b_assignment"])
 
     # graph
     sns.set_style('ticks')
@@ -72,11 +74,14 @@ def main():
     ax0 = plt.subplot(gs[0,:])
     ax0.ticklabel_format(style='sci')
     ax1 = plt.subplot(gs[1,:],sharex=ax0)
-    sns.scatterplot(x="bubble", y="n", size="b_conditional_count", hue="b_assignment_count", data=pd_lists,ax=ax0)
-    sns.scatterplot(x="quick", y="n", size="q_conditional_count",data=pd_lists,ax=ax1)
     # kind of sloppy line of best fit
-    ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black')
-    ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black')
+    ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black',alpha=.5)
+    ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black',alpha=.5)
+    sns.scatterplot(x="bubble", y="n", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
+    sns.scatterplot(x="quick", y="n", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
+    # x = symbols("x")
+    # bubble_poly = sum(S("{:6.2f}".format(v))*x**i for i, v in enumerate(p[::-1]))
+    # bubble_eq_latex = sympy.printing.latex(poly)
     ax0.set_title("Bubble Sort")
     ax0.set_ylabel("Size of N")
     ax0.set_xlabel("Time")
