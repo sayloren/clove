@@ -65,16 +65,19 @@ def main():
     # make data frame for out lists
     pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,bubble_cond,bubble_assi)),columns=['bubble','quick', 'n',"q_conditional_count","b_conditional_count","b_assignment_count"])
 
-    # graph
-    # get equation for line of best fit
+    # get line of best fit for sorts
     # https://stackoverflow.com/questions/22239691/code-for-line-of-best-fit-of-a-scatter-plot-in-python
+    # bubble_fit = np.polyfit(x=bubble_times, y=number_elements, deg=2,full=True)
+    # quick_fit = np.polyfit(x=quick_times, y=number_elements, deg=2,full=True)
+
+    # graph
     pp = PdfPages('Sorting_graphs.pdf')
     sns.set_style('ticks')
     sns.set_palette("husl")
     gs = gridspec.GridSpec(2,1,height_ratios=[1,1],width_ratios=[1])
-    gs.update(hspace=.8)
     plt.figure(figsize=(10,10))
     ax0 = plt.subplot(gs[0,:])
+    ax0.ticklabel_format(style='sci')
     ax1 = plt.subplot(gs[1,:],sharex=ax0)
     sns.scatterplot(x="bubble", y="n", size="b_conditional_count", hue="b_assignment_count", data=pd_lists,ax=ax0)
     sns.scatterplot(x="quick", y="n", size="q_conditional_count",data=pd_lists,ax=ax1)
