@@ -6,18 +6,16 @@ return the time it took and graphs
 """
 # directory organization
 # tests
-# markdown
 
 import argparse
 import time
 import random
 
-import bubble_sort
-import quick_sort
+import algs
 
 import pandas as pd
 import numpy as np
-import sympy #import S, symbols
+import sympy
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -47,12 +45,12 @@ def main():
 
         # run quick sort
         quick_start = time.time()
-        out_bubble,assignments_quick,conditionals_quick = quick_sort.run_quick_sort(r)
+        out_bubble,assignments_quick,conditionals_quick = algs.run_quick_sort(r)
         quick_end = time.time()
 
         # run bubble sort
         bubble_start = time.time()
-        out_bubble,assignments_bubble,conditionals_bubble = bubble_sort.run_bubble_sort(r)
+        out_bubble,assignments_bubble,conditionals_bubble = algs.run_bubble_sort(r)
         bubble_end = time.time()
 
         # collect the times it took for each sort
@@ -75,6 +73,7 @@ def main():
     ax0.ticklabel_format(style='sci')
     ax1 = plt.subplot(gs[1,:],sharex=ax0)
     # kind of sloppy line of best fit
+    # should get this in terms of N
     ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black',alpha=.5)
     ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black',alpha=.5)
     sns.scatterplot(x="bubble", y="n", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
@@ -86,10 +85,10 @@ def main():
     quick_poly = sum(sympy.S("{:6.2f}".format(v))*x**i for i, v in enumerate(quick_fit[::-1]))
     bubble_latex = sympy.printing.latex(bubble_poly)
     quick_latex = sympy.printing.latex(quick_poly)
-    ax0.set_title("Bubble Sort ${0}$".format(bubble_latex))
+    ax0.set_title("Bubble Sort, ${0}$".format(bubble_latex))
     ax0.set_ylabel("Size of N")
     ax0.set_xlabel("Time")
-    ax1.set_title("Quick Sort ${0}$".format(quick_latex))
+    ax1.set_title("Quick Sort, ${0}$".format(quick_latex))
     ax1.set_ylabel("Size of N")
     ax1.set_xlabel("Time")
     sns.despine()
