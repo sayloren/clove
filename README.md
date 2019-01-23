@@ -6,7 +6,10 @@
 #### Bubble and Quick Sort Jan 25
 
 ##### To run sort
-`<python -m sort -t <# lists> -a <max val in list> -e <range of elements in list>`
+`<python -m sort -t -a -e>`
+-t number of lists
+-a maximum value for list items
+-e range from which to draw the number of elements in a list
 
 ##### To run sort tests
 
