@@ -82,15 +82,17 @@ def run_graphing(total,max,element):
     quick_poly = sum(sympy.S("{:6.2f}".format(v))*x**i for i, v in enumerate(quick_fit[::-1]))
     bubble_latex = sympy.printing.latex(bubble_poly)
     quick_latex = sympy.printing.latex(quick_poly)
-    ax0.set_title("Bubble Sort, ${0}$".format(bubble_latex))
+    ax0.set_title("Bubble Sort")#, ${0}$".format(bubble_latex)
     ax0.set_ylabel("Size of N")
     ax0.set_xlabel("Time Complexity")
-    ax1.set_title("Quick Sort, ${0}$".format(quick_latex))
+    ax1.set_title("Quick Sort")#, ${0}$".format(quick_latex)
     ax1.set_ylabel("Size of N")
     ax1.set_xlabel("Time Complexity")
+    ax0.legend(loc='lower right')
+    ax1.legend(loc='lower right')
     sns.despine()
     plt.savefig("Sorting_graphs.png",format='png')
-    return quick_lists,bubble_lists
+    return quick_lists,bubble_lists,bubble_latex[0],quick_latex[0]
 
 if __name__ == "__main__":
 	main()

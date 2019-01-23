@@ -12,7 +12,8 @@ def get_args():
 
 def main():
 	args = get_args()
-	quick_lists,bubble_lists = run_graphing(args.total,args.max,args.element)
+	quick_lists,bubble_lists,bubble_latex,quick_latex = run_graphing(args.total,args.max,args.element)
+	return bubble_latex,quick_latex
 
 if __name__ == "__main__":
 	main()
