@@ -14,14 +14,15 @@
 
 
 ##### To run sort tests
+`<python -m pytest>`
 
 
 ![a](/Sorting_graphs.png)
 
-| Sort          | N             |
-| ------------- |:-------------:|
-| Quick Sort    |               |
-| Bubble Sort   |               |
+| Sort | Theoretical | Constant | X | X^2 | N |
+| ---------- |:----------:|----------:|----------:|----------:|----------:|
+| Quick Sort | O(n log(n)) |  |  |  |  |
+| Bubble Sort | O(N2) |  |  |  |  |
 
 
 
