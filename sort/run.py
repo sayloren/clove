@@ -67,8 +67,8 @@ def run_graphing(total,max,element):
     ax1 = plt.subplot(gs[:,1],sharey=ax0)
     # kind of sloppy line of best fit
     # should get this in terms of N
-    ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black',alpha=.5)
-    ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black',alpha=.5)
+    # ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black',alpha=.5)
+    # ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black',alpha=.5)
     # what is the relationship between n and conditional/assignment counts?
     # try to figure out the relation between conditional/assignments to the intercepts
     # add theoretical O(n2) and O(nlog(n))
