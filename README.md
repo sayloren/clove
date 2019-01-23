@@ -1,13 +1,15 @@
 # clove
 :see_no_evil: :hear_no_evil: :speak_no_evil:
 
-## UCSF
-## BMI 203
-## Algorithms Homework
-## 2018
+## UCSF BMI 203 Algorithms Homework 2018
 
-#### Bubble and Quick Sort
-#### Jan 25
+#### Bubble and Quick Sort Jan 25
+
+##### To run sort
+`<python -m sort -t <# lists> -a <max val in list> -e <range of elements in list>`
+
+##### To run sort tests
+
 
 ![a](/Sorting_graphs.png)
 
