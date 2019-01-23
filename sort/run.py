@@ -60,11 +60,11 @@ def run_graphing(total,max,element):
     sns.set_style('ticks')
     sns.set_palette("husl")
     # change to share y axis, next to eachother
-    gs = gridspec.GridSpec(2,1,height_ratios=[1,1],width_ratios=[1])
-    plt.figure(figsize=(10,10))
-    ax0 = plt.subplot(gs[0,:])
+    gs = gridspec.GridSpec(1,2,height_ratios=[1],width_ratios=[1,1])
+    plt.figure(figsize=(10,5))
+    ax0 = plt.subplot(gs[:,0])
     ax0.ticklabel_format(style='sci')
-    ax1 = plt.subplot(gs[1,:],sharex=ax0)
+    ax1 = plt.subplot(gs[:,1],sharey=ax0)
     # kind of sloppy line of best fit
     # should get this in terms of N
     ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black',alpha=.5)
