@@ -1,4 +1,4 @@
-from sort import algs
+from sort import sort_algs
 
 def test_pointless_sort():
     x = [1,2,3]

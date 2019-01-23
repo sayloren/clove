@@ -1,7 +1,7 @@
 # this file is only called when the package is called from the command
 # line with python -m sort <other flags>
 import argparse
-from .run import run_graphing
+from .sort_run import run_graphing
 
 def get_args():
 	parser = argparse.ArgumentParser(description="Description")

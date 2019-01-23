@@ -1,4 +1,8 @@
 # clove
+
+[![Build
+Status](https://travis-ci.org/sayloren/example.svg?branch=master)](https://travis-ci.org/sayloren/example)
+
 :see_no_evil: :hear_no_evil: :speak_no_evil:
 
 ## UCSF BMI 203 Algorithms Homework 2018
@@ -23,10 +27,3 @@
 | ---------- |:----------:|----------:|----------:|----------:|----------:|
 | Quick Sort | O(n log(n)) |  |  |  |  |
 | Bubble Sort | O(N2) |  |  |  |  |
-
-
-
-
-
-
->!-- add travis info

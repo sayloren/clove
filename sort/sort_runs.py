@@ -8,7 +8,7 @@ return the time it took and graphs
 import time
 import random
 
-from .algs import run_bubble_sort,run_quick_sort
+from .sort_algs import run_bubble_sort,run_quick_sort
 
 import pandas as pd
 import numpy as np
@@ -69,8 +69,8 @@ def run_graphing(total,max,element):
     # should get this in terms of N
     # ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black',alpha=.5)
     # ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black',alpha=.5)
-    # what is the relationship between n and conditional/assignment counts?
-    # try to figure out the relation between conditional/assignments to the intercepts
+    # ax0.plot(pd_lists['n'],c='black',alpha=.5)
+    # ax1.plot(pd_lists['n'],c='black',alpha=.5)
     # add theoretical O(n2) and O(nlog(n))
     # quick sort on log(n) plot - will look like line
     sns.scatterplot(x="bubble", y="n", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
@@ -82,11 +82,11 @@ def run_graphing(total,max,element):
     quick_poly = sum(sympy.S("{:6.2f}".format(v))*x**i for i, v in enumerate(quick_fit[::-1]))
     bubble_latex = sympy.printing.latex(bubble_poly)
     quick_latex = sympy.printing.latex(quick_poly)
-    ax0.set_title("Bubble Sort")#, ${0}$".format(bubble_latex)
-    ax0.set_ylabel("Size of N")
+    ax0.set_title("Bubble Sort, ${0}$".format(bubble_latex))
+    ax0.set_ylabel("N")
     ax0.set_xlabel("Time Complexity")
-    ax1.set_title("Quick Sort")#, ${0}$".format(quick_latex)
-    ax1.set_ylabel("Size of N")
+    ax1.set_title("Quick Sort, ${0}$".format(quick_latex))
+    ax1.set_ylabel("N")
     ax1.set_xlabel("Time Complexity")
     ax0.legend(loc='lower right')
     ax1.legend(loc='lower right')
