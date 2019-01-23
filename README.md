@@ -4,3 +4,5 @@
 
 #### Bubble and Quick Sort, Jan 25
 ![a](/sort/Sorting_graphs.png)
+
+>!-- add travis info

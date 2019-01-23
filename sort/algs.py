@@ -4,8 +4,6 @@ Jan 2018
 Script to implement bubble sort and quick sort
 """
 
-import argparse
-
 def bubble_sort(bubble_list):
     global count_assignments,count_conditionals
     count_assignments += 1
@@ -26,6 +24,7 @@ def bubble_sort(bubble_list):
         return bubble_sort(bubble_list)
 
 def run_bubble_sort(bubble_list):
+    # check that all elements are ints mynewlist = [s for s in mylist if s.isdigit()]
     global count_conditionals
     global count_assignments
     count_assignments,count_conditionals = 0,0
@@ -50,6 +49,7 @@ def quick_sort(quick_list):
             if x >= quick_list[0]])
 
 def run_quick_sort(quick_list):
+    # check that all elements are ints mynewlist = [s for s in mylist if s.isdigit()]
     global count_conditionals
     global count_assignments
     count_assignments,count_conditionals = 0,0

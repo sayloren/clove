@@ -4,14 +4,11 @@ Jan 2018
 Script to call the sorting functions on randomly generated lists,
 return the time it took and graphs
 """
-# directory organization
-# tests
 
-import argparse
 import time
 import random
 
-import algs
+from .algs import run_bubble_sort,run_quick_sort
 
 import pandas as pd
 import numpy as np
@@ -21,23 +18,16 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-def get_args():
-    parser = argparse.ArgumentParser(description="Description")
-    parser.add_argument("-t", "--total", type=int, default="100", help='number of random lists to generate')
-    parser.add_argument("-m", "--max", type=int, default="10", help='the largest number in the random lists')
-    parser.add_argument("-e", "--element", type=int, default="1000", help='the population from which to draw the random number of elements per list')
-    return parser.parse_args()
-
-def main():
-    args = get_args()
+def run_graphing(total,max,element):
 
     # empty lists to collect data from loop
     bubble_times,quick_times = [],[]
     number_elements = []
     quick_cond,quick_assi,bubble_cond,bubble_assi = [],[],[],[]
+    quick_lists,bubble_lists = [],[]
 
     # make the random lists
-    random_lists = [[random.randrange(args.max) for _ in range(random.randrange(args.element))] for __ in range(args.total)]
+    random_lists = [[random.randrange(max) for _ in range(random.randrange(element))] for __ in range(total)]
 
     # iterate through the random lists
     for r in random_lists:
@@ -45,15 +35,17 @@ def main():
 
         # run quick sort
         quick_start = time.time()
-        out_bubble,assignments_quick,conditionals_quick = algs.run_quick_sort(r)
+        out_quick,assignments_quick,conditionals_quick = run_quick_sort(r)
         quick_end = time.time()
 
         # run bubble sort
         bubble_start = time.time()
-        out_bubble,assignments_bubble,conditionals_bubble = algs.run_bubble_sort(r)
+        out_bubble,assignments_bubble,conditionals_bubble = run_bubble_sort(r)
         bubble_end = time.time()
 
         # collect the times it took for each sort
+        quick_lists.append(out_quick)
+        bubble_lists.append(out_bubble)
         quick_times.append(quick_end - quick_start)
         bubble_times.append(bubble_end - bubble_start)
         quick_cond.append(conditionals_quick)
@@ -67,6 +59,7 @@ def main():
     # graph
     sns.set_style('ticks')
     sns.set_palette("husl")
+    # change to share y axis, next to eachother
     gs = gridspec.GridSpec(2,1,height_ratios=[1,1],width_ratios=[1])
     plt.figure(figsize=(10,10))
     ax0 = plt.subplot(gs[0,:])
@@ -76,6 +69,10 @@ def main():
     # should get this in terms of N
     ax0.plot(np.unique(pd_lists['bubble']), np.poly1d(np.polyfit(pd_lists['bubble'], pd_lists['n'], 2))(np.unique(pd_lists['bubble'])),c='black',alpha=.5)
     ax1.plot(np.unique(pd_lists['quick']), np.poly1d(np.polyfit(pd_lists['quick'], pd_lists['n'], 1))(np.unique(pd_lists['quick'])),c='black',alpha=.5)
+    # what is the relationship between n and conditional/assignment counts?
+    # try to figure out the relation between conditional/assignments to the intercepts
+    # add theoretical O(n2) and O(nlog(n))
+    # quick sort on log(n) plot - will look like line
     sns.scatterplot(x="bubble", y="n", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
     sns.scatterplot(x="quick", y="n", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
     x = sympy.symbols("x")
@@ -87,12 +84,13 @@ def main():
     quick_latex = sympy.printing.latex(quick_poly)
     ax0.set_title("Bubble Sort, ${0}$".format(bubble_latex))
     ax0.set_ylabel("Size of N")
-    ax0.set_xlabel("Time")
+    ax0.set_xlabel("Time Complexity")
     ax1.set_title("Quick Sort, ${0}$".format(quick_latex))
     ax1.set_ylabel("Size of N")
-    ax1.set_xlabel("Time")
+    ax1.set_xlabel("Time Complexity")
     sns.despine()
     plt.savefig("Sorting_graphs.png",format='png')
+    return quick_lists,bubble_lists
 
 if __name__ == "__main__":
 	main()
