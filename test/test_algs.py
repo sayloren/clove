@@ -3,12 +3,12 @@ import numpy as np
 
 x = np.random.rand(10)
 test_empty = np.array([])
-test_char = np.array(['a','b','c'])
+# test_char = np.array(['a','b','c'])
 test_random = np.array(np.random.RandomState(17))
 test_zero = np.array([0])
 test_neg = np.array([2,1,0,-1,-2])
 
-collect_test = [test_empty,test_char,test_random,test_zero,test_neg]
+collect_test = [test_empty,test_random,test_zero,test_neg]#test_char,
 
 # could test the number of expected conditionals, assignments?
 # all(l[i] <= l[i+1] for i in range(len(l)-1)) # check that a list is sorted
