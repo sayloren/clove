@@ -7,23 +7,41 @@ Status](https://travis-ci.org/sayloren/example.svg?branch=master)](https://travi
 
 ## UCSF BMI 203 Algorithms Homework 2018
 
+To use the package, first make a new conda environment and activate it
+
+```
+conda create -n exampleenv python=3
+source activate exampleenv
+```
+
+then run
+
+```
+conda install --yes --file requirements.txt
+```
+
+to install all the dependencies in `requirements.txt`. Then the package's
+main function (located in `example/__main__.py`) can be run as follows
+
+```
+python -m example
+```
+
 #### Bubble and Quick Sort Jan 25
 
 ##### To run sort
-`<python -m sort -t -a -e>`
+` python -m sort -t -a -e `
 
 -t number of lists  
 -a maximum value for list items  
 -e range from which to draw the number of elements in a list  
 
-
 ##### To run sort tests
-`<python -m pytest>`
-
+` python -m pytest `
 
 ![a](/Sorting_graphs.png)
 
-| Sort | Theoretical | Constant | X | X^2 | N |
-| ---------- |:----------:|----------:|----------:|----------:|----------:|
-| Quick Sort | O(n log(n)) |  |  |  |  |
-| Bubble Sort | O(N2) |  |  |  |  |
+| Sort | Theoretical | N |
+| ---------- |:----------:|----------:|
+| Bubble Sort | O(N2) | 222570 |
+| Quick Sort | O(n log(n)) | 32299880 |
