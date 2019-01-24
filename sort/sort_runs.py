@@ -61,11 +61,17 @@ def run_graphing(total,max,element):
     # graph formatting
     sns.set_style('ticks')
     sns.set_palette("husl")
-    gs = gridspec.GridSpec(1,2,height_ratios=[1],width_ratios=[1,1])
-    plt.figure(figsize=(10,5))
-    ax0 = plt.subplot(gs[:,0])
+    gs = gridspec.GridSpec(3,2,height_ratios=[1,1,1],width_ratios=[1,1])
+    gs.update(hspace=.8)
+    plt.figure(figsize=(10,10))
+    ax0 = plt.subplot(gs[0,0])
+    ax1 = plt.subplot(gs[0,1])
+    ax2 = plt.subplot(gs[2,0])
+    ax3 = plt.subplot(gs[1,0])
+    ax4 = plt.subplot(gs[2,1])
+    ax5 = plt.subplot(gs[1,1])
     ax0.ticklabel_format(style='sci')
-    ax1 = plt.subplot(gs[:,1],sharey=ax0)
+
     # quick sort on log(n) plot - will look like line
 
     # scatter plots for actual data
@@ -91,30 +97,30 @@ def run_graphing(total,max,element):
     quick_o = int(abs(quick_fit.flat[0]))
 
     # labeling and formating for graphs
-    ax0.set_title("Bubble Sort, {0}".format(bubble_o))#, ${0}$".format(bubble_latex)
+    ax0.set_title("Bubble Sort, Time {0}".format(bubble_o))#, ${0}$".format(bubble_latex)
     ax0.set_ylabel("Time (seconds)")# Complexity
     ax0.set_xlabel("N (number of elements)")
-    ax1.set_title("Quick Sort, {0}".format(quick_o))#, ${0}$".format(quick_latex)
+    ax1.set_title("Quick Sort, Time {0}".format(quick_o))#, ${0}$".format(quick_latex)
     ax1.set_ylabel("Time (seconds)")# Complexity
     ax1.set_xlabel("N (number of elements)")
     ax0.legend(loc='upper left',frameon=False,fontsize='xx-small')
     ax1.legend(loc="upper left",frameon=False,fontsize='xx-small')
-    sns.despine()
-    plt.savefig("Sorting_time.png",format='png')
-    plt.clf()
+    # sns.despine()
+    # plt.savefig("Sorting_time.png",format='png')
+    # plt.clf()
 
     # graph n against time complexity
 
     # graph formatting
-    sns.set_style('ticks')
-    sns.set_palette("husl")
-    gs = gridspec.GridSpec(2,2,height_ratios=[1,1],width_ratios=[1,1])
-    gs.update(hspace=.8)
-    plt.figure(figsize=(10,5))
-    ax2 = plt.subplot(gs[0,0])
-    ax3 = plt.subplot(gs[1,0])
-    ax4 = plt.subplot(gs[0,1])
-    ax5 = plt.subplot(gs[1,1])
+    # sns.set_style('ticks')
+    # sns.set_palette("husl")
+    # gs = gridspec.GridSpec(2,2,height_ratios=[1,1],width_ratios=[1,1])
+    # gs.update(hspace=.8)
+    # plt.figure(figsize=(10,5))
+    # ax2 = plt.subplot(gs[0,0])
+    # ax3 = plt.subplot(gs[1,0])
+    # ax4 = plt.subplot(gs[0,1])
+    # ax5 = plt.subplot(gs[1,1])
 
     # scatter plots for actual data
     # pd_lists['bubble'].options.display.float_format = '{:.2E}'.format

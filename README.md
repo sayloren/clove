@@ -47,8 +47,6 @@ python -m sort -t -a -e
 python -m pytest
 ```
 
-![a](/Sorting_time.png)
-
 ![a](/Sorting_time_complexity.png)
 
 | Sort | Theoretical | N |
