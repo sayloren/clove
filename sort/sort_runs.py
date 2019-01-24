@@ -56,7 +56,7 @@ def run_graphing(total,max,element):
         bubble_assi.append(assignments_bubble)
 
     # make data frame for out lists
-    pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,quick_assi,bubble_cond,bubble_assi)),columns=['bubble','quick', 'n',"q_conditional","q_assignment","b_conditional","b_assignment"])
+    pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,quick_assi,bubble_cond,bubble_assi)),columns=['b_time','q_time', 'n',"q_conditional","q_assignment","b_conditional","b_assignment"])
 
     # graph formatting
     sns.set_style('ticks')
@@ -75,16 +75,16 @@ def run_graphing(total,max,element):
     ax0.ticklabel_format(style='sci')
 
     # scatter plots for actual data
-    sns.scatterplot(x="n", y="bubble", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
-    sns.scatterplot(x="n", y="quick", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
-    sns.scatterplot(x="n", y="b_conditional", size="b_assignment", hue="bubble", data=pd_lists,ax=ax2)
-    sns.scatterplot(x="n", y="b_assignment", size="b_conditional", hue="bubble",data=pd_lists,ax=ax3)
-    sns.scatterplot(x="n", y="q_conditional", size="q_assignment", hue="quick", data=pd_lists,ax=ax4)
-    sns.scatterplot(x="n", y="q_assignment", size="q_conditional", hue="quick",data=pd_lists,ax=ax5)
+    sns.scatterplot(x="n", y="b_time", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
+    sns.scatterplot(x="n", y="q_time", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
+    sns.scatterplot(x="n", y="b_conditional", size="b_assignment", hue="b_time", data=pd_lists,ax=ax2)
+    sns.scatterplot(x="n", y="b_assignment", size="b_conditional", hue="b_time",data=pd_lists,ax=ax3)
+    sns.scatterplot(x="n", y="q_conditional", size="q_assignment", hue="q_time", data=pd_lists,ax=ax4)
+    sns.scatterplot(x="n", y="q_assignment", size="q_conditional", hue="q_time",data=pd_lists,ax=ax5)
 
     # kind of sloppy line of best fit
-    # ax0.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['bubble'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
-    # ax1.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['quick'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax0.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_time'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax1.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_time'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
     # ax2.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_conditional'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
     # ax3.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
     # ax4.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_conditional'], 3))(np.unique(pd_lists['n'])),c='black',alpha=.5)
@@ -102,8 +102,8 @@ def run_graphing(total,max,element):
 
     # get and format the big o notation info
     x = sympy.symbols("x")
-    bubble_fit = np.polyfit(pd_lists['bubble'], pd_lists['n'], 2)
-    quick_fit = np.polyfit(pd_lists['quick'], pd_lists['n'], 1)
+    bubble_fit = np.polyfit(pd_lists['b_time'], pd_lists['n'], 2)
+    quick_fit = np.polyfit(pd_lists['q_time'], pd_lists['n'], 1)
     bubble_poly = sum(sympy.S("{:6.2f}".format(v))*x**i for i, v in enumerate(bubble_fit[::-1]))
     quick_poly = sum(sympy.S("{:6.2f}".format(v))*x**i for i, v in enumerate(quick_fit[::-1]))
     bubble_latex = sympy.printing.latex(bubble_poly)
