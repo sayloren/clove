@@ -7,6 +7,8 @@ Status](https://travis-ci.org/sayloren/example.svg?branch=master)](https://travi
 
 ## UCSF BMI 203 Algorithms Homework 2018
 
+[Travis Build Results](https://travis-ci.org/sayloren/clove)
+
 To use the package, first make a new conda environment and activate it
 
 ```
