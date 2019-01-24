@@ -30,14 +30,18 @@ python -m example
 #### Bubble and Quick Sort Jan 25
 
 ##### To run sort
-` python -m sort -t -a -e `
+```
+python -m sort -t -a -e
+```
 
 -t number of lists  
 -a maximum value for list items  
 -e range from which to draw the number of elements in a list  
 
 ##### To run sort tests
-` python -m pytest `
+```
+python -m pytest
+```
 
 ![a](/Sorting_graphs.png)
 
