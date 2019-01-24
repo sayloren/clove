@@ -51,5 +51,5 @@ python -m pytest
 
 | Sort | Theoretical | N |
 | ---------- |:----------:|----------:|
-| Bubble Sort | O(N2) | ~30000000 |
-| Quick Sort | O(n log(n)) | ~200000 |
+| Bubble Sort | ![a](nsquared.gif) | ~30000000 |
+| Quick Sort | ![a](nlogn.gif) | ~200000 |
