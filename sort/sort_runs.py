@@ -7,7 +7,7 @@ return the time it took and graphs
 
 import time
 import random
-import os
+import pathlib
 
 from .sort_algs import run_bubble_sort,run_quick_sort
 
@@ -70,25 +70,25 @@ def run_graphing(total,max,element):
     ax1 = plt.subplot(gs[0,1],sharex=ax0)
     ax2 = plt.subplot(gs[2,0],sharex=ax0)
     ax3 = plt.subplot(gs[1,0],sharex=ax0)
-    ax4 = plt.subplot(gs[2,1],sharex=ax0)
-    ax5 = plt.subplot(gs[1,1],sharex=ax0)
+    ax4 = plt.subplot(gs[2,1])
+    ax5 = plt.subplot(gs[1,1],sharex=ax4)
     ax0.ticklabel_format(style='sci')
 
     # scatter plots for actual data
     sns.scatterplot(x="n", y="bubble", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
     sns.scatterplot(x="n", y="quick", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
-    sns.scatterplot(x="n", y="b_conditional", hue="bubble", data=pd_lists,ax=ax2)
-    sns.scatterplot(x="n", y="b_assignment", hue="bubble",data=pd_lists,ax=ax3)
-    sns.scatterplot(x="n", y="q_conditional", hue="quick", data=pd_lists,ax=ax4)
-    sns.scatterplot(x="n", y="q_assignment", hue="quick",data=pd_lists,ax=ax5)
+    sns.scatterplot(x="n", y="b_conditional", size="b_assignment", hue="bubble", data=pd_lists,ax=ax2)
+    sns.scatterplot(x="n", y="b_assignment", size="b_conditional", hue="bubble",data=pd_lists,ax=ax3)
+    sns.scatterplot(x="n", y="q_conditional", size="q_assignment", hue="quick", data=pd_lists,ax=ax4)
+    sns.scatterplot(x="n", y="q_assignment", size="q_conditional", hue="quick",data=pd_lists,ax=ax5)
 
     # kind of sloppy line of best fit
-    ax0.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['bubble'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
-    ax1.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['quick'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
-    ax2.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_conditional'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
-    ax3.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
-    ax4.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_conditional'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
-    ax5.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax0.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['bubble'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax1.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['quick'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax2.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_conditional'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax3.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax4.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_conditional'], 3))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    # ax5.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_assignment'], 3))(np.unique(pd_lists['n'])),c='black',alpha=.5)
 
     n_val = range(1,element)
     n_squ = [i ** 2 for i in n_val]
@@ -97,6 +97,8 @@ def run_graphing(total,max,element):
     ax2.plot(n_val,n_squ,c='purple',alpha=.5,linestyle='-.')
     ax4.plot(n_val,n_log,c='purple',alpha=.5,linestyle='-.')
     ax5.plot(n_val,n_log,c='purple',alpha=.5,linestyle='-.')
+    ax4.set(xscale="log", yscale="log")
+    ax5.set(xscale="log", yscale="log")
 
     # get and format the big o notation info
     x = sympy.symbols("x")
@@ -136,8 +138,11 @@ def run_graphing(total,max,element):
         ax.legend(loc='upper left',frameon=False,fontsize='xx-small')
     sns.despine()
 
-    # my_path = os.path.abspath(__file__)
-    plt.savefig("Sorting_time_complexity.png",format='png')
+    outdir = pathlib.Path('images')
+    outfile = outdir / "Sorting_time_complexity.png"
+    outdir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(str(outfile),format='png')
+    plt.close()
 
     return quick_lists,bubble_lists,bubble_fit.flat[0],quick_fit.flat[0]
 
