@@ -47,9 +47,9 @@ python -m sort -t -a -e
 python -m pytest
 ```
 
-![a](/Sorting_time_complexity.png)
+![a](/images/Sorting_time_complexity.png)
 
 | Sort | Theoretical | N |
 | ---------- |:----------:|:----------:|
-| Bubble Sort | ![a](nsquared.gif) | ~30000000 |
-| Quick Sort | ![a](nlogn.gif) | ~200000 |
+| Bubble Sort | ![a](/images/nsquared.gif) | ~30000000 |
+| Quick Sort | ![a](/images/nlogn.gif) | ~200000 |

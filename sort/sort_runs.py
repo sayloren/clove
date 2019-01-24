@@ -7,6 +7,7 @@ return the time it took and graphs
 
 import time
 import random
+import os
 
 from .sort_algs import run_bubble_sort,run_quick_sort
 
@@ -134,6 +135,8 @@ def run_graphing(total,max,element):
         ax.set_ylabel("Complexity")
         ax.legend(loc='upper left',frameon=False,fontsize='xx-small')
     sns.despine()
+
+    # my_path = os.path.abspath(__file__)
     plt.savefig("Sorting_time_complexity.png",format='png')
 
     return quick_lists,bubble_lists,bubble_fit.flat[0],quick_fit.flat[0]
