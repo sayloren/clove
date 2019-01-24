@@ -15,7 +15,7 @@ def bubble_sort(bubble_list):
             # switch the values
             bubble_list[i], bubble_list[i+1] = bubble_list[i+1], bubble_list[i]
             count_conditionals += 1
-            count_assignments += 2
+            count_assignments += 1
             test_order += 1
     count_conditionals += 1
     if test_order == 0:
@@ -42,7 +42,7 @@ def quick_sort(quick_list):
         # add to the list of values that are larger than the pivot,
         # recursively put through the function
         count_conditionals += 1
-        count_assignments += 3 # not sure if putting value into list is assignment
+        count_assignments += 1 # not sure if putting value into list is assignment
         return quick_sort([x for x in quick_list[1:]
             if x < quick_list[0]]) + [quick_list[0]] + \
             quick_sort([x for x in quick_list[1:]

@@ -18,13 +18,11 @@ conda create -n homeworkone python=3
 source activate homeworkone
 ```
 
-then run
+to install all the requirements run
 
 ```
 conda install --yes --file requirements.txt
 ```
-
-to install all the dependencies in `requirements.txt`.
 
 #### Bubble and Quick Sort Jan 25
 
@@ -44,7 +42,7 @@ python -m pytest
 
 ![a](/images/Sorting_time_complexity.png)
 
-| Sort | Theoretical | N |
-| ---------- |:----------:|:----------:|
-| Bubble Sort | ![a](/images/nsquared.gif) | ~30000000 |
-| Quick Sort | ![a](/images/nlogn.gif) | ~200000 |
+| Sort | Theoretical | Coefficient | N |
+| ---------- |:----------:|:----------:|:----------:|
+| Bubble Sort | ![a](/images/nsquared.gif) | ~30000000 | ~5000 |
+| Quick Sort | ![a](/images/nlogn.gif) | ~200000 |  |
