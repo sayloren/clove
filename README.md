@@ -14,8 +14,8 @@ Status](https://travis-ci.org/sayloren/clove.svg?branch=master)](https://travis-
 To use the package, first make a new conda environment and activate it
 
 ```
-conda create -n exampleenv python=3
-source activate exampleenv
+conda create -n homeworkone python=3
+source activate homeworkone
 ```
 
 then run
