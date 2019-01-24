@@ -9,6 +9,8 @@ Status](https://travis-ci.org/sayloren/example.svg?branch=master)](https://travi
 
 [Travis Build Results](https://travis-ci.org/sayloren/clove)
 
+#### Set up
+
 To use the package, first make a new conda environment and activate it
 
 ```
