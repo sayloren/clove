@@ -1,7 +1,7 @@
 # clove
 
 [![Build
-Status](https://travis-ci.org/sayloren/example.svg?branch=master)](https://travis-ci.org/sayloren/example)
+Status](https://travis-ci.org/sayloren/clove.svg?branch=master)](https://travis-ci.org/sayloren/clove)
 
 [Travis Build Results](https://travis-ci.org/sayloren/clove)
 
@@ -50,6 +50,6 @@ python -m pytest
 ![a](/Sorting_time_complexity.png)
 
 | Sort | Theoretical | N |
-| ---------- |:----------:|----------:|
+| ---------- |:----------:|:----------:|
 | Bubble Sort | ![a](nsquared.gif) | ~30000000 |
 | Quick Sort | ![a](nlogn.gif) | ~200000 |
