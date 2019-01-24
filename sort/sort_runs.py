@@ -56,7 +56,7 @@ def run_graphing(total,max,element):
     # make data frame for out lists
     pd_lists = pd.DataFrame(list(zip(bubble_times,quick_times,number_elements,quick_cond,quick_assi,bubble_cond,bubble_assi)),columns=['bubble','quick', 'n',"q_conditional","q_assignment","b_conditional","b_assignment"])
 
-    # graph
+    # graph n against time
 
     # graph formatting
     sns.set_style('ticks')
@@ -91,16 +91,66 @@ def run_graphing(total,max,element):
     quick_o = int(abs(quick_fit.flat[0]))
 
     # labeling and formating for graphs
-    ax0.set_title("Bubble Sort, O({0})".format(bubble_o))#, ${0}$".format(bubble_latex)
-    ax0.set_ylabel("Time")# Complexity
-    ax0.set_xlabel("N")
-    ax1.set_title("Quick Sort, O({0})".format(quick_o))#, ${0}$".format(quick_latex)
-    ax1.set_ylabel("Time")# Complexity
-    ax1.set_xlabel("N")
-    ax0.legend(loc='upper left')
-    ax1.legend(loc="upper left")
+    ax0.set_title("Bubble Sort, {0}".format(bubble_o))#, ${0}$".format(bubble_latex)
+    ax0.set_ylabel("Time (seconds)")# Complexity
+    ax0.set_xlabel("N (number of elements)")
+    ax1.set_title("Quick Sort, {0}".format(quick_o))#, ${0}$".format(quick_latex)
+    ax1.set_ylabel("Time (seconds)")# Complexity
+    ax1.set_xlabel("N (number of elements)")
+    ax0.legend(loc='upper left',frameon=False,fontsize='xx-small')
+    ax1.legend(loc="upper left",frameon=False,fontsize='xx-small')
     sns.despine()
-    plt.savefig("Sorting_graphs.png",format='png')
+    plt.savefig("Sorting_time.png",format='png')
+    plt.clf()
+
+    # graph n against time complexity
+
+    # graph formatting
+    sns.set_style('ticks')
+    sns.set_palette("husl")
+    gs = gridspec.GridSpec(2,2,height_ratios=[1,1],width_ratios=[1,1])
+    gs.update(hspace=.8)
+    plt.figure(figsize=(10,5))
+    ax2 = plt.subplot(gs[0,0])
+    ax3 = plt.subplot(gs[1,0])
+    ax4 = plt.subplot(gs[0,1])
+    ax5 = plt.subplot(gs[1,1])
+
+    # scatter plots for actual data
+    # pd_lists['bubble'].options.display.float_format = '{:.2E}'.format
+    sns.scatterplot(x="n", y="b_conditional", hue="bubble", data=pd_lists,ax=ax2)
+    sns.scatterplot(x="n", y="b_assignment", hue="bubble",data=pd_lists,ax=ax3)
+    sns.scatterplot(x="n", y="q_conditional", hue="quick", data=pd_lists,ax=ax4)
+    sns.scatterplot(x="n", y="q_assignment", hue="quick",data=pd_lists,ax=ax5)
+
+    # add theoretical O(n2) and O(nlog(n))
+
+    # kind of sloppy line of best fit
+    ax2.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_conditional'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    ax3.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    ax4.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_conditional'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+    ax5.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+
+    # # get and format the big o notation info
+    # bubble_fit = np.polyfit(pd_lists['bubble'], pd_lists['n'], 2)
+    # quick_fit = np.polyfit(pd_lists['quick'], pd_lists['n'], 1)
+    #
+    # # in terms of N
+    # bubble_o = int(abs(bubble_fit.flat[0]))
+    # quick_o = int(abs(quick_fit.flat[0]))
+
+    # # labeling and formating for graphs
+    ax2.set_title("Bubble Sort, Conditionals")#, ${0}$".format(bubble_latex)
+    ax3.set_title("Bubble Sort, Assignments")#, ${0}$".format(quick_latex)
+    ax4.set_title("Quick Sort, Conditionals")#, ${0}$".format(bubble_latex)
+    ax5.set_title("Quick Sort, Assignments")#, ${0}$".format(quick_latex)
+    axes = [ax2,ax3,ax4,ax5]
+    for ax in axes:
+        ax.set_ylabel("Time Complexity")
+        ax.set_xlabel("N (number of elements)")
+        ax.legend(loc='upper left',frameon=False,fontsize='xx-small')
+    sns.despine()
+    plt.savefig("Sorting_time_complexity.png",format='png')
 
     return quick_lists,bubble_lists,bubble_fit.flat[0],quick_fit.flat[0]
 

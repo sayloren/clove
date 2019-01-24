@@ -47,9 +47,11 @@ python -m sort -t -a -e
 python -m pytest
 ```
 
-![a](/Sorting_graphs.png)
+![a](/Sorting_time.png)
 
 | Sort | Theoretical | N |
 | ---------- |:----------:|----------:|
-| Bubble Sort | O(N2) | 32299880 |
-| Quick Sort | O(n log(n)) | 222570 |
+| Bubble Sort | O(N2) | ~30000000 |
+| Quick Sort | O(n log(n)) | ~200000 |
+
+![a](/Sorting_time_complexity.png)
