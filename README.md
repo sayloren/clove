@@ -24,12 +24,7 @@ then run
 conda install --yes --file requirements.txt
 ```
 
-to install all the dependencies in `requirements.txt`. Then the package's
-main function (located in `example/__main__.py`) can be run as follows
-
-```
-python -m example
-```
+to install all the dependencies in `requirements.txt`.
 
 #### Bubble and Quick Sort Jan 25
 
