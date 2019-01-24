@@ -132,18 +132,22 @@ def run_graphing(total,max,element):
     ax5.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
 
     # # get and format the big o notation info
-    # bubble_fit = np.polyfit(pd_lists['bubble'], pd_lists['n'], 2)
-    # quick_fit = np.polyfit(pd_lists['quick'], pd_lists['n'], 1)
-    #
+    bubble_ass_fit = np.polyfit(pd_lists['b_conditional'], pd_lists['n'], 2)
+    bubble_con_fit = np.polyfit(pd_lists['b_assignment'], pd_lists['n'], 2)
+    quick_ass_fit = np.polyfit(pd_lists['q_conditional'], pd_lists['n'], 1)
+    quick_con_fit = np.polyfit(pd_lists['q_assignment'], pd_lists['n'], 1)
+
     # # in terms of N
-    # bubble_o = int(abs(bubble_fit.flat[0]))
-    # quick_o = int(abs(quick_fit.flat[0]))
+    bubble_ass_o = int(abs(bubble_fit.flat[0]))
+    bubble_con_o = int(abs(bubble_fit.flat[0]))
+    quick_ass_o = int(abs(quick_fit.flat[0]))
+    quick_con_o = int(abs(quick_fit.flat[0]))
 
     # # labeling and formating for graphs
-    ax2.set_title("Bubble Sort, Conditionals")#, ${0}$".format(bubble_latex)
-    ax3.set_title("Bubble Sort, Assignments")#, ${0}$".format(quick_latex)
-    ax4.set_title("Quick Sort, Conditionals")#, ${0}$".format(bubble_latex)
-    ax5.set_title("Quick Sort, Assignments")#, ${0}$".format(quick_latex)
+    ax2.set_title("Bubble Sort, Conditionals {0}".format(bubble_ass_o))#, ${0}$".format(bubble_latex)
+    ax3.set_title("Bubble Sort, Assignments {0}".format(bubble_con_o))#, ${0}$".format(quick_latex)
+    ax4.set_title("Quick Sort, Conditionals {0}".format(quick_ass_o))#, ${0}$".format(bubble_latex)
+    ax5.set_title("Quick Sort, Assignments {0}".format(quick_con_o))#, ${0}$".format(quick_latex)
     axes = [ax2,ax3,ax4,ax5]
     for ax in axes:
         ax.set_ylabel("Time Complexity")

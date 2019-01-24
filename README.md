@@ -49,9 +49,9 @@ python -m pytest
 
 ![a](/Sorting_time.png)
 
+![a](/Sorting_time_complexity.png)
+
 | Sort | Theoretical | N |
 | ---------- |:----------:|----------:|
 | Bubble Sort | O(N2) | ~30000000 |
 | Quick Sort | O(n log(n)) | ~200000 |
-
-![a](/Sorting_time_complexity.png)
