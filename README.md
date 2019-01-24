@@ -3,11 +3,11 @@
 [![Build
 Status](https://travis-ci.org/sayloren/example.svg?branch=master)](https://travis-ci.org/sayloren/example)
 
+[Travis Build Results](https://travis-ci.org/sayloren/clove)
+
 :see_no_evil: :hear_no_evil: :speak_no_evil:
 
 ## UCSF BMI 203 Algorithms Homework 2018
-
-[Travis Build Results](https://travis-ci.org/sayloren/clove)
 
 #### Set up
 
