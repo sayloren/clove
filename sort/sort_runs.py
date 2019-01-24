@@ -13,6 +13,7 @@ from .sort_algs import run_bubble_sort,run_quick_sort
 import pandas as pd
 import numpy as np
 import sympy
+from math import log
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -72,8 +73,6 @@ def run_graphing(total,max,element):
     ax5 = plt.subplot(gs[1,1],sharex=ax0)
     ax0.ticklabel_format(style='sci')
 
-    # quick sort on log(n) plot - will look like line
-
     # scatter plots for actual data
     sns.scatterplot(x="n", y="bubble", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
     sns.scatterplot(x="n", y="quick", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
@@ -89,6 +88,14 @@ def run_graphing(total,max,element):
     ax3.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['b_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
     ax4.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_conditional'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
     ax5.plot(np.unique(pd_lists['n']), np.poly1d(np.polyfit(pd_lists['n'],pd_lists['q_assignment'], 2))(np.unique(pd_lists['n'])),c='black',alpha=.5)
+
+    n_val = range(1,element)
+    n_squ = [i ** 2 for i in n_val]
+    n_log = [i*log(i,10) for i in n_val]
+    ax3.plot(n_val,n_squ,c='purple',alpha=.5,linestyle='-.')
+    ax2.plot(n_val,n_squ,c='purple',alpha=.5,linestyle='-.')
+    ax4.plot(n_val,n_log,c='purple',alpha=.5,linestyle='-.')
+    ax5.plot(n_val,n_log,c='purple',alpha=.5,linestyle='-.')
 
     # get and format the big o notation info
     x = sympy.symbols("x")
@@ -110,8 +117,6 @@ def run_graphing(total,max,element):
     bubble_con_o = int(abs(bubble_fit.flat[0]))
     quick_ass_o = int(abs(quick_fit.flat[0]))
     quick_con_o = int(abs(quick_fit.flat[0]))
-
-    # add theoretical O(n2) and O(nlog(n))
 
     # # labeling and formating for graphs
     ax2.set_title("Bubble Sort, Conditionals")#, ${0}$".format(bubble_latex)
