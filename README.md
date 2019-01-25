@@ -42,7 +42,7 @@ python -m pytest
 
 ![a](/images/Sorting_time_complexity.png)
 
-| Sort | Theoretical | Coefficient | n |
-| ---------- |:----------:|:----------:|:----------:|
-| Bubble Sort | ![a](/images/nsquared.gif) | ~30000 | ~200 |
-| Quick Sort | ![a](/images/nlogn.gif) | ~100000 | ~40000 |
+| Sort | Theoretical | Coefficient |
+| ---------- |:----------:|:----------:|
+| Bubble Sort | ![a](/images/nsquared.gif) | ~30000 |
+| Quick Sort | ![a](/images/nlogn.gif) | ~100000 |
