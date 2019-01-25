@@ -13,16 +13,10 @@ collect_test = [test_empty,test_random,test_zero,test_neg]#test_char,
 # could test the number of expected conditionals, assignments?
 # all(l[i] <= l[i+1] for i in range(len(l)-1)) # check that a list is sorted
 
-# def test_pointless_sort():
-    # check that pointless_sort always returns [1,2,3]
-    # assert np.array_equal(sort_algs.run_bubble_sort(x), sorted(x))
-
-    # check that pointless_sort still returns [1,2,3]
-    # assert np.array_equal(sort_algs.pointless_sort(x), sorted(x))
+def test_pointless_sort():
+    assert np.array_equal(sort_algs.pointless_sort(x), np.array([1, 2, 3]))
 
 def test_bubblesort():
-    # for now, just attempt to call the bubblesort function, should
-    # actually check output
     sort_algs.run_bubble_sort(x)
 
     # Actually test bubblesort here. It might be useful to think about
@@ -30,7 +24,7 @@ def test_bubblesort():
     # think about: (1) does your code handle 0-element arrays without
     # failing, (2) does your code handle characters?
 
-    # assert np.array_equal(sort_algs.run_bubble_sort(x)[0], sorted(x))
+    assert np.array_equal(sort_algs.run_bubble_sort(x), sorted(x))
     # for i in collect_test:
         # assert np.array_equal(sort_algs.run_bubble_sort(i)[0], sorted(i))
 

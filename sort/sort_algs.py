@@ -3,6 +3,10 @@ Wren Saylor
 Jan 2018
 Script to implement bubble sort and quick sort
 """
+import numpy as np
+
+def pointless_sort(x):
+    return np.array([1, 2, 3])
 
 def bubble_sort(bubble_list):
     global count_assignments,count_conditionals
@@ -42,7 +46,7 @@ def quick_sort(quick_list):
         # add to the list of values that are larger than the pivot,
         # recursively put through the function
         count_conditionals += 1
-        count_assignments += 1 # not sure if putting value into list is assignment
+        count_assignments += 3 # not sure if putting value into list is assignment
         return quick_sort([x for x in quick_list[1:]
             if x < quick_list[0]]) + [quick_list[0]] + \
             quick_sort([x for x in quick_list[1:]

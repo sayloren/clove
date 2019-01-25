@@ -44,5 +44,5 @@ python -m pytest
 
 | Sort | Theoretical | Coefficient | n |
 | ---------- |:----------:|:----------:|:----------:|
-| Bubble Sort | ![a](/images/nsquared.gif) | ~30000000 | ~5000 |
-| Quick Sort | ![a](/images/nlogn.gif) | ~200000 |  |
+| Bubble Sort | ![a](/images/nsquared.gif) | ~30000 | ~200 |
+| Quick Sort | ![a](/images/nlogn.gif) | ~100000 | ~40000 |
