@@ -67,14 +67,17 @@ def run_graphing(total,max,element):
     fig.text(0.5, 0.04, 'N (number of elements)', ha='center', va='center', fontsize=18)
     fig.text(0.03, 0.5, 'Time', ha='center', va='center', rotation='vertical', fontsize=18)
     ax0 = plt.subplot(gs[0,0])
-    ax1 = plt.subplot(gs[0,1],sharex=ax0)
-    ax2 = plt.subplot(gs[2,0],sharex=ax0)
-    ax3 = plt.subplot(gs[1,0],sharex=ax0)
+    ax1 = plt.subplot(gs[0,1])#,sharex=ax0
+    ax2 = plt.subplot(gs[2,0])#,sharex=ax0
+    ax3 = plt.subplot(gs[1,0])#,sharex=ax0
     ax4 = plt.subplot(gs[2,1])
-    ax5 = plt.subplot(gs[1,1],sharex=ax4)
+    ax5 = plt.subplot(gs[1,1])#,sharex=ax4
     ax0.ticklabel_format(style='sci')
 
+    ax0.set(xscale="log", yscale="log")
     ax1.set(xscale="log", yscale="log")
+    ax2.set(xscale="log", yscale="log")
+    ax3.set(xscale="log", yscale="log")
     ax4.set(xscale="log", yscale="log")
     ax5.set(xscale="log", yscale="log")
 
