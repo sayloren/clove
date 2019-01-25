@@ -65,7 +65,7 @@ def run_graphing(total,max,element):
     gs.update(hspace=.8)
     fig = plt.figure(figsize=(10,10))
     fig.text(0.5, 0.04, 'N (number of elements)', ha='center', va='center', fontsize=18)
-    fig.text(0.04, 0.5, 'Time', ha='center', va='center', rotation='vertical', fontsize=18)
+    fig.text(0.03, 0.5, 'Time', ha='center', va='center', rotation='vertical', fontsize=18)
     ax0 = plt.subplot(gs[0,0])
     ax1 = plt.subplot(gs[0,1],sharex=ax0)
     ax2 = plt.subplot(gs[2,0],sharex=ax0)
