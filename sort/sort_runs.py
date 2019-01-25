@@ -74,6 +74,10 @@ def run_graphing(total,max,element):
     ax5 = plt.subplot(gs[1,1],sharex=ax4)
     ax0.ticklabel_format(style='sci')
 
+    ax1.set(xscale="log", yscale="log")
+    ax4.set(xscale="log", yscale="log")
+    ax5.set(xscale="log", yscale="log")
+
     # scatter plots for actual data
     sns.scatterplot(x="n", y="b_time", size="b_conditional", hue="b_assignment", data=pd_lists,ax=ax0)
     sns.scatterplot(x="n", y="q_time", size="q_conditional", hue="q_assignment",data=pd_lists,ax=ax1)
@@ -97,8 +101,6 @@ def run_graphing(total,max,element):
     ax2.plot(n_val,n_squ,c='purple',alpha=.5,linestyle='-.')
     ax4.plot(n_val,n_log,c='purple',alpha=.5,linestyle='-.')
     ax5.plot(n_val,n_log,c='purple',alpha=.5,linestyle='-.')
-    ax4.set(xscale="log", yscale="log")
-    ax5.set(xscale="log", yscale="log")
 
     # get and format the big o notation info
     x = sympy.symbols("x")
