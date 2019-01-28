@@ -45,6 +45,7 @@ def quick_sort(quick_list):
         # if the value is less than the pivot, recursively put through function
         # add to the list of values that are larger than the pivot,
         # recursively put through the function
+        # https://stackoverflow.com/questions/18262306/quicksort-with-python
         count_conditionals += 1
         count_assignments += 3 # not sure if putting value into list is assignment
         return quick_sort([x for x in quick_list[1:]
